@@ -3,11 +3,11 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 
 const GAMES_QUERY = gql`
-  query {
-      Game {
-          id
-      }
-  }
+    subscription {
+        Game(where: {state: {_eq: "live"}}) {
+            id
+        }
+    }
 `;
 
 const GameScreen = props => (
@@ -16,10 +16,6 @@ const GameScreen = props => (
   </div>
 );
 
-const withGames = graphql(GAMES_QUERY, {
-  options: ({ episode }) => ({
-    variables: { episode }
-  }),
-});
+const withGames = graphql(GAMES_QUERY);
 
 export default withGames(GameScreen);
