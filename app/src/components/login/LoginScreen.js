@@ -1,21 +1,58 @@
-import * as React from 'react';
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
+import React, { Component } from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 
-const PLAYER_QUERY = gql`
-    query {
-        Player {
-            id
-        }
+const addPlayer = gql`
+  mutation InsertPlayer($name: String!) {
+    insert_Player(objects: [{ name: $name }]) {
+      returning {
+        id
+        name
+      }
     }
+  }
 `;
 
-const LoginScreen = props => (
-  <div>
-    ID: {props.data.Player && props.data.Player.length > 0 && props.data.Player[0].id}
-  </div>
-);
+class LoginScreen extends Component {
+  state = {
+    name: ""
+  };
 
-const withResults = graphql(PLAYER_QUERY);
+  handleNameChange = e => {
+    this.setState({ name: e.target.value });
+  };
 
-export default withResults(LoginScreen);
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(e);
+    this.props
+      .mutate({ variables: { name: this.state.name } })
+      .then(({ data }) => {
+        console.log("got data", data);
+      })
+      .catch(error => {
+        console.log("there was an error sending the query", error);
+      });
+  };
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            onChange={this.handleNameChange}
+            placeholder="Enter your name"
+            value={this.state.name}
+          />
+          <input type="submit" title="Join" />
+        </form>
+      </div>
+    );
+  }
+}
+
+// const withResults = graphql(PLAYER_QUERY);
+
+export default graphql(addPlayer)(LoginScreen);
