@@ -22,21 +22,23 @@ const INSERT_ANSWER = gql`
 `;
 
 const SubmitButton = styled.button`
-    font-size: 1.3em;
-    position: sticky;
-    bottom: 60px;
-    width: 100%;
-    margin: 0 auto;
-    border-radius: 20px;
-    background-color: #db6a3e;
-    border: none;
-    padding: .5em 0em;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: .2em;
-    color: #fff;
-    cursor: pointer;
-`
+  font-size: 1.3em;
+  position: sticky;
+  bottom: 33px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 20px;
+  background-color: hsl(0, 0%, 17%);
+  border: none;
+  padding: 0.5em 0em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 1px 1px 5.8px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+`;
 
 const Marker = () => <FontAwesomeIcon
   style={{
