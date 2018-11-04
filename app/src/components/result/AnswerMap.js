@@ -1,10 +1,10 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import GoogleMapReact from 'google-map-react';
 import gql from 'graphql-tag';
-import {Fragment, Component} from 'react';
-import * as React from 'react';
-import {graphql} from 'react-apollo';
 import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Component} from 'react';
+import {graphql} from 'react-apollo';
 
 const ANSWER_MAP_SUBSCRIPTION = gql`
     subscription AnswerMapSubscription($gameId: uuid!) {
@@ -13,14 +13,21 @@ const ANSWER_MAP_SUBSCRIPTION = gql`
             longLocation
             playerID
         }
+        Game(where: {id: {_eq: $gameId}}) {
+            questions {
+                latLocation
+                longLocation
+                location
+            }
+        }
     }
 `;
 
-const CurrentPlayerMarker = () => <FontAwesomeIcon icon="map-marker"/>;
-
-const OtherPlayerMarker = () => <FontAwesomeIcon icon="map-marker-alt"/>;
-
-const SolutionMarker = () => <FontAwesomeIcon icon="map-pin"/>;
+const Marker = ({isCurrentPlayer, isSolution}) => {
+  // current player, solution, other players
+  return isCurrentPlayer ? <FontAwesomeIcon icon="map-marker"/> : isSolution ? <FontAwesomeIcon icon="map-pin"/> :
+    <FontAwesomeIcon icon="map-marker-alt"/>;
+};
 
 class AnswerMap extends Component {
   static defaultProps = {
@@ -32,17 +39,21 @@ class AnswerMap extends Component {
   };
 
   render() {
-    if (!this.props.data.Answer) {
+    if (!this.props.data.Answer || !this.props.data.Game) {
       return null;
     }
 
-    console.log(this.props.data.Answer);
+    const question = this.props.data.Game[0].questions;
 
     return (
       <div style={{height: "100vh", width: "100%"}}>
         <GoogleMapReact bootstrapURLKeys={{key: "AIzaSyA8cmyFachXAjlw_lc7QvC8JX1MnmGPJWw"}}
                         defaultCenter={this.props.center} defaultZoom={this.props.zoom}>
-          {/*<Marker lat={this.state.latitude} lng={this.state.longitude}/>*/}
+          {this.props.data.Answer.map((answer, i) => {
+            return <Marker key={i} lat={answer.latLocation} lng={answer.longLocation}
+                    isCurrentPlayer={localStorage.getItem("witw-playerId") === answer.playerID}/>
+          })}
+          <Marker lat={question.latLocation} lng={question.longLocation} isSolution/>
         </GoogleMapReact>
       </div>
     )
