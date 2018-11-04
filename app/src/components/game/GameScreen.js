@@ -13,7 +13,7 @@ class GameScreen extends Component {
     const currentDateTime = new Date();
 
     if (endDateTime < currentDateTime) {
-      // pushToResults();
+      pushToResults();
     } else {
       setTimeout(pushToResults, endDateTime - currentDateTime);
     }
