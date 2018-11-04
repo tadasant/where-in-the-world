@@ -10,6 +10,7 @@
     "apollo-link-http": "^1.5.5",
     "apollo-link-ws": "^1.0.9",
     "apollo-utilities": "^1.0.25",
+    "date-fns": "^1.29.0",
     "gql": "^1.1.2",
     "graphql": "^14.0.2",
     "graphql-request": "^1.8.2",
@@ -20,6 +21,7 @@
     "react-dom": "^16.6.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "styled-components": "^4.0.3",
     "subscriptions-transport-ws": "^0.9.15"
   },
   "devDependencies": {
