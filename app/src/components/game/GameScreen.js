@@ -1,28 +1,41 @@
-import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
 import * as React from 'react';
-import {graphql} from 'react-apollo';
+import {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 
-const GAMES_QUERY = gql`
-    subscription {
-        Game(where: {state: {_eq: "live"}}) {
-            id
+class GameScreen extends Component {
+  componentDidMount() {
+    const {game} = this.props;
+    const pushToResults = () => this.props.history.push(`/results?gameid=${game.id}`);
+    const endDateTime = new Date(game.endDateTime);
+    const currentDateTime = new Date();
+
+    if (endDateTime < currentDateTime) {
+      pushToResults();
+    } else {
+      setTimeout(pushToResults, endDateTime - currentDateTime);
+    }
+  }
+
+  render() {
+    const {game} = this.props;
+    return (
+      <div>
+        Game:<br/>
+        <div>
+          ID: {game.id}<br/>
+          endDateTime: {game.endDateTime}<br/>
+          questionId: {game.questions.id}<br/>
+          questionImage: <img src={game.questions.imgURL}/>
+        </div>
         }
-    }
-`;
+      </div>
+    )
+  }
+}
 
-const GameScreen = props => (
-  <div>
-    Games:<br/>
-    {
-      props.data && props.data.Game ? props.data.Game.map(game => (
-          <div>
-            {game.id}
-          </div>
-        )) : null
-    }
-  </div>
-);
+GameScreen.propTypes = {
+  game: PropTypes.object
+};
 
-const withGames = graphql(GAMES_QUERY);
-
-export default withGames(GameScreen);
+export default withRouter(GameScreen);
