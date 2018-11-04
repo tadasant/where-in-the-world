@@ -1,14 +1,15 @@
 import { request } from 'graphql-request'
 const geoDist = require('geo-distance');
 
-function computeResult(event, contect, callback) {
+function computeResult(event, context, callback) {
   const postBody = JSON.parse(event.body);
 
-  console.log(postBody);
-  const latLocation = postBody.event.data.new.latLocation;
-  const longLocation = postBody.event.data.new.longLocation;
-  const gameId = postBody.event.data.new.gameId;
-  const playerId = postBody.event.data.new.playerId;
+  const {
+    id: answerId,
+    latLocation,
+    longLocation,
+    gameId
+  } = postBody.event.data.new;
 
   const guessLocation = {
     lat: latLocation,
@@ -28,8 +29,6 @@ function computeResult(event, contect, callback) {
     }
   `
 
-  console.log(getAnswerQuery);
-
   const hasuraURL = 'https://where-in-the-world-hq.herokuapp.com/v1alpha1/graphql';
 
   const headers = {
@@ -38,25 +37,55 @@ function computeResult(event, contect, callback) {
 
   request(hasuraURL, getAnswerQuery)
     .then((data) => {
-      console.log(data.Game[0].questions.latLocation);
-      console.log(data.Game[0].questions.longLocation);
       const truthLocation = {
         lat: data.Game[0].questions.latLocation,
-        long: data.Game[0].questions.longLocation,
+        lon: data.Game[0].questions.longLocation,
       }
 
       const distDiff = geoDist.between(guessLocation, truthLocation);
       const kmDiff = distDiff.human_readable().distance;
 
-      callback(null, {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify(data),
-      })
+      const addResultQuery = `
+        mutation {
+          insert_Result(objects: [
+            {
+              score: ${kmDiff},
+              answerId: "${answerId}"
+            }
+          ]) {
+            affected_rows
+          }
+        }
+      `;
+
+      request(hasuraURL, addResultQuery)
+        .then((response) => {
+          // const n_affected_rows = response.insert_Result.affected_rows;
+          callback(null, {
+            statusCode: 200,
+            headers,
+            body: 'success',
+          })
+        })
+        .catch(err => {
+          console.log(err);
+          callback(new Error('computeResult function failed. Error code 9686744392'), {
+            statusCode: 500,
+            headers,
+            body: 'computeResult Lambda Failed'
+          })
+        })
 
     })
-
-
+    .catch(err => {
+      console.log(err);
+      callback(new Error('computeResult function failed. Error code 8784003033'),
+       {
+        statusCode: 500,
+        headers,
+        body: 'computeResult Lambda Failed'
+      })
+    })
 }
 
 exports.handler = computeResult;
