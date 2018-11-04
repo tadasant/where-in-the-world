@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
+import {Fragment} from 'react';
 import * as React from "react";
 import { Component } from "react";
 import { withRouter } from "react-router-dom";
+import Header from '../header/Header';
 import AnswerSelection from "./AnswerSelection";
 import ProgressBar from "./ProgressBar";
 import styled from "styled-components";
@@ -50,19 +52,22 @@ class GameScreen extends Component {
     const { game } = this.props;
     console.log("game", game);
     return (
-      <GameScreenStyled>
-        {/* ID: {game.id}<br/> */}
-        {/* endDateTime: {game.endDateTime}<br/> */}
-        {/* questionId: {game.questions.id}<br/> */}
-        <Question>
-          <QuestionTitle>Where in the world is the photo?</QuestionTitle>
-          <QuestionImage src={game.questions.imgURL} />
-        </Question>
-        <AnswerContainer>
-          <AnswerSelection questionId={game.questions.id} gameId={game.id} />
-        </AnswerContainer>
-        <ProgressBar endDateTime={game.endDateTime} />
-      </GameScreenStyled>
+      <Fragment>
+        <Header/>
+        <GameScreenStyled>
+          {/* ID: {game.id}<br/> */}
+          {/* endDateTime: {game.endDateTime}<br/> */}
+          {/* questionId: {game.questions.id}<br/> */}
+          <Question>
+            <QuestionTitle>Where in the world is the photo?</QuestionTitle>
+            <QuestionImage src={game.questions.imgURL} />
+          </Question>
+          <AnswerContainer>
+            <AnswerSelection questionId={game.questions.id} gameId={game.id} />
+          </AnswerContainer>
+          <ProgressBar endDateTime={game.endDateTime} />
+        </GameScreenStyled>
+      </Fragment>
     );
   }
 }
