@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Fragment} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
-import GameScreen from './game/GameScreen';
+import GameScreen from './game/GameScreenContainer';
 import LoginScreen from './login/LoginScreen';
 import ResultScreen from './result/ResultScreen';
 
