@@ -21,11 +21,19 @@ const rankResults = answers =>
   answers.sort((a, b) => b.result[0].score - a.result[0].score);
 
 const Results = props => {
-  if (props.data.loading) return <div>Loading....</div>;
-  const rankedResults = rankResults(props.data.Game[0].answers);
-  const resultsList = rankedResults.map((result, i) => (
+  if (props.data.loading || !props.data.Game) {
+    return null;
+  }
+
+  const answers = props.data.Game[0].answers;
+  const allResultsReady = answers.every(answer => answer.result && answer.result.length === 1);
+  if (allResultsReady) {
+    rankResults(answers);
+  }
+
+  const resultsList = answers.map((answer, i) => (
     <li key={i}>
-      {result.player.name} - {result.result[0].score}
+      {answer.player.name} - {answer.result.length > 0 ? answer.result[0].score : 'Calculating...'}
     </li>
   ));
 
