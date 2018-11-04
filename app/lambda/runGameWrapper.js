@@ -3,7 +3,7 @@ import httpRequest from 'request';
 
 function runGameWrapper(event, context, callback) {
 
-  const host = event.headers.host;
+
   let {idx=-1} = event.queryStringParameters;
 
   const getQuestions = `
@@ -16,10 +16,14 @@ function runGameWrapper(event, context, callback) {
 
   const hasuraURL = 'https://where-in-the-world-hq.herokuapp.com/v1alpha1/graphql';
   const runGameEndpoint = 'runGame';
-  console.log(host);
-  console.log(host.includes('localhost'));
-  const runGameURL = host.includes('localhost') ? `http://${host}/${runGameEndpoint}` : `http://${host}/.netlify/functions/${runGameEndpoint}`;
-  console.log(runGameURL);
+
+  let runGameURL = `https://witworld.live/.netlify/function/${runGameEndpoint}`;
+  const host = event.headers.host;
+  if (host !== undefined && typeof host === 'string') {
+    if (host.includes('localhost')) {
+      runGameURL = `http://localhost:9000/${runGameEndpoint}`
+    }
+  }
 
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -37,6 +41,7 @@ function runGameWrapper(event, context, callback) {
       const nQuestions = questions.length;
       if (idx === -1) {
         idx = getRandomIntInclusive(0, nQuestions);
+        console.log('random');
       }
 
       idx = idx % nQuestions;
@@ -54,8 +59,8 @@ function runGameWrapper(event, context, callback) {
           },
           json: true,
         }, function(error, response, body) {
-          console.log(error);
-          console.log(body);
+          console.log('**error:', error);
+          console.log('**body:', body);
           if (error != null) {
             callback(new Error('runGameWrapper function failed. Error code 6578641122'), {
               statusCode: 500,
