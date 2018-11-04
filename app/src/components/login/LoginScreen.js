@@ -18,17 +18,27 @@ class LoginScreen extends Component {
     name: ""
   };
 
+  componentDidMount() {
+    this.checkForId();
+  };
+
+  checkForId() {
+    if(localStorage.getItem("playerId")) {
+      this.props.history.push('/game');  
+    } 
+  }
+
   handleNameChange = e => {
     this.setState({ name: e.target.value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(e);
     this.props
       .mutate({ variables: { name: this.state.name } })
       .then(({ data }) => {
-        console.log("got data", data);
+        localStorage.setItem("playerId", data.insert_Player.returning[0].id);
+        this.props.history.push('/game');
       })
       .catch(error => {
         console.log("there was an error sending the query", error);
