@@ -1,21 +1,17 @@
-import * as React from 'react';
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
+import React, { Component } from "react";
+import queryString from "query-string";
+import Results from './Results';
 
-const RESULT_QUERY = gql`
-    query {
-        Result {
-            id
-        }
+class ResultScreen extends Component {
+    render() {
+        const params = queryString.parse(this.props.location.search);
+        const { gameId } = params;
+        console.log(gameId);
+        return (
+            <Results id={gameId} />
+        );
     }
-`;
+}
 
-const ResultScreen = props => (
-  <div>
-    ID: {props.data.Result && props.data.Result.length > 0 && props.data.Result[0].id}
-  </div>
-);
 
-const withResults = graphql(RESULT_QUERY);
-
-export default withResults(ResultScreen);
+export default ResultScreen;
