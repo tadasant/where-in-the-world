@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/Logo.png';
+import UserName from './UserName';
 
 const HeaderContainer = styled.div`
   height: 64px;
@@ -25,7 +26,7 @@ const Header = props => (
       <LogoImg src={logo}/>
     </div>
     <div>
-      User name
+      <UserName/>
     </div>
   </HeaderContainer>
 );
