@@ -6,14 +6,29 @@ import AnswerSelection from "./AnswerSelection";
 import ProgressBar from "./ProgressBar";
 import styled from "styled-components";
 
-const Question = styled.h2`
+const GameScreenStyled = styled.div`
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+`;
+
+const Question = styled.div`
+  flex: 0 1 auto;
+`;
+
+const QuestionTitle = styled.h2`
   color: #fff;
-  padding: 0 .5em;
+  padding: 0 0.5em;
   font-size: 1.3em;
 `;
 
 const QuestionImage = styled.img`
   width: 100%;
+  flex: 0 1 auto;
+`;
+
+const AnswerContainer = styled.div`
+  flex: 1 1 auto;
 `;
 
 class GameScreen extends Component {
@@ -33,17 +48,21 @@ class GameScreen extends Component {
 
   render() {
     const { game } = this.props;
-    console.log("game", game)
+    console.log("game", game);
     return (
-      <div>
-          {/* ID: {game.id}<br/> */}
-          {/* endDateTime: {game.endDateTime}<br/> */}
-          {/* questionId: {game.questions.id}<br/> */}
-          <Question>Where in the world is the photo?</Question>
-            <QuestionImage src={game.questions.imgURL} />
+      <GameScreenStyled>
+        {/* ID: {game.id}<br/> */}
+        {/* endDateTime: {game.endDateTime}<br/> */}
+        {/* questionId: {game.questions.id}<br/> */}
+        <Question>
+          <QuestionTitle>Where in the world is the photo?</QuestionTitle>
+          <QuestionImage src={game.questions.imgURL} />
+        </Question>
+        <AnswerContainer>
           <AnswerSelection questionId={game.questions.id} gameId={game.id} />
-          <ProgressBar endDateTime={game.endDateTime} />
-      </div>
+        </AnswerContainer>
+        <ProgressBar endDateTime={game.endDateTime} />
+      </GameScreenStyled>
     );
   }
 }

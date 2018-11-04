@@ -6,6 +6,7 @@ import * as React from 'react';
 import {Component, Fragment} from 'react';
 import {graphql} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
+import styled from "styled-components";
 
 const INSERT_ANSWER = gql`
     mutation InsertAnswer($gameId: uuid!, $playerId: uuid!, $latLocation: Float!, $longLocation: Float!) {
@@ -19,6 +20,23 @@ const INSERT_ANSWER = gql`
         }
     }
 `;
+
+const SubmitButton = styled.button`
+    font-size: 1.3em;
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 20px;
+    background-color: #db6a3e;
+    border: none;
+    padding: .5em 0em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: #fff;
+    cursor: pointer;
+`
 
 const Marker = () => <FontAwesomeIcon icon="map-marker"/>;
 
@@ -71,14 +89,14 @@ class AnswerSelection extends Component {
   render() {
     return (
       <Fragment>
-        <div style={{height: "100vh", width: "100%"}}>
+        <div style={{ height: "calc(100vh - 370px)", width: "100%"}}>
           <GoogleMapReact bootstrapURLKeys={{key: "AIzaSyA8cmyFachXAjlw_lc7QvC8JX1MnmGPJWw"}}
                           defaultCenter={this.props.center} defaultZoom={this.props.zoom}
                           onClick={this.handleClick}>
             <Marker lat={this.state.latitude} lng={this.state.longitude}/>
           </GoogleMapReact>
         </div>
-        <button onClick={this.handleSubmit}>Submit</button>
+        <SubmitButton onClick={this.handleSubmit}>Submit</SubmitButton>
       </Fragment>
     )
   }
