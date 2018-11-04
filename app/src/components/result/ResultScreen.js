@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from "react";
 import queryString from "query-string";
+import AnswerMap from './AnswerMap';
 import GameImage from './GameImage';
 import Results from './Results';
 
@@ -10,9 +11,8 @@ class ResultScreen extends Component {
         console.log(gameid);
         return (
           <Fragment>
-              {/* Image */}
               <GameImage gameId={gameid}/>
-              {/* Map */}
+              <AnswerMap gameId={gameid}/>
             <Results id={gameid} />
           </Fragment>
         );
