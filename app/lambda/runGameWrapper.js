@@ -17,7 +17,7 @@ function runGameWrapper(event, context, callback) {
   const hasuraURL = 'https://where-in-the-world-hq.herokuapp.com/v1alpha1/graphql';
   const runGameEndpoint = 'runGame';
 
-  let runGameURL = `https://witworld.live/.netlify/function/${runGameEndpoint}`;
+  let runGameURL = `https://witworld.live/.netlify/functions/${runGameEndpoint}`;
   const host = event.headers.host;
   if (host !== undefined && typeof host === 'string') {
     if (host.includes('localhost')) {
