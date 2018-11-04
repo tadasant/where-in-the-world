@@ -43,13 +43,24 @@ function computeResult(event, context, callback) {
       }
 
       const distDiff = geoDist.between(guessLocation, truthLocation);
-      const kmDiff = distDiff.human_readable().distance;
+      let kmDiff;
+      if (distDiff.human_readable().unit === 'm') {
+        kmDiff = distDiff.human_readable().distance / 1000;
+      } else {
+        kmDiff = distDiff.human_readable().distance;
+      }
+
+      const score = Math.round( kmDiff * 10 ) / 10;
+
+      console.log(distDiff.human_readable());
+      console.log(kmDiff);
+      console.log(score);
 
       const addResultQuery = `
         mutation {
           insert_Result(objects: [
             {
-              score: ${kmDiff},
+              score: ${score},
               answerId: "${answerId}"
             }
           ]) {
