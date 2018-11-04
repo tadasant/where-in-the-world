@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
+import styled from "styled-components";
 
 const addPlayer = gql`
   mutation InsertPlayer($name: String!) {
@@ -13,6 +14,53 @@ const addPlayer = gql`
   }
 `;
 
+const LoginHeader = styled.div`
+  position: fixed;
+  width: 100%;
+  background: #ec8d1e;
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  color: #fff;
+  letter-spacing: 0.2em;
+  margin: 0.6em 0em;
+  font-size: 1.3em;
+  text-transform: uppercase;
+`;
+
+const CreatePlayerForm = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+  margin: 0 1.3em;
+`;
+
+const NameInput = styled.input`
+  width: 100%;
+  padding: 0.3em 0.4em;
+  font-size: 1.3em;
+  margin: 0.3em 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+
+const JoinButton = styled.input`
+  background: #db6a3e;
+  border: 1px solid #db6a3e;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: 100%;
+  padding: 0.3em 0;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+`;
+
 class LoginScreen extends Component {
   state = {
     name: ""
@@ -20,12 +68,12 @@ class LoginScreen extends Component {
 
   componentDidMount() {
     this.checkForId();
-  };
+  }
 
   checkForId() {
-    if(localStorage.getItem("playerId")) {
-      this.props.history.push('/game');  
-    } 
+    if (localStorage.getItem("witw-playerId")) {
+      this.props.history.push("/game");
+    }
   }
 
   handleNameChange = e => {
@@ -37,8 +85,11 @@ class LoginScreen extends Component {
     this.props
       .mutate({ variables: { name: this.state.name } })
       .then(({ data }) => {
-        localStorage.setItem("witw-playerId", data.insert_Player.returning[0].id);
-        this.props.history.push('/game');
+        localStorage.setItem(
+          "witw-playerId",
+          data.insert_Player.returning[0].id
+        );
+        this.props.history.push("/game");
       })
       .catch(error => {
         console.log("there was an error sending the query", error);
@@ -48,16 +99,20 @@ class LoginScreen extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
+        <LoginHeader>
+          <Title>Where in the world?</Title>
+        </LoginHeader>
+
+        <CreatePlayerForm onSubmit={this.handleSubmit}>
+          <NameInput
             type="text"
             name="name"
             onChange={this.handleNameChange}
             placeholder="Enter your name"
             value={this.state.name}
           />
-          <input type="submit" title="Join" />
-        </form>
+          <JoinButton type="submit" value="Join Game" />
+        </CreatePlayerForm>
       </div>
     );
   }
