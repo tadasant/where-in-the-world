@@ -3,6 +3,7 @@ import queryString from "query-string";
 import AnswerMap from './AnswerMap';
 import GameImage from './GameImage';
 import Results from './Results';
+import Header from '../header/Header';
 
 class ResultScreen extends Component {
     render() {
@@ -11,6 +12,7 @@ class ResultScreen extends Component {
         console.log(gameid);
         return (
           <Fragment>
+            <Header />
               <GameImage gameId={gameid}/>
               <AnswerMap gameId={gameid}/>
               <Results gameId={gameid} />
