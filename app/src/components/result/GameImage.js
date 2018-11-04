@@ -14,7 +14,6 @@ const GAME_IMAGE_QUERY = gql`
 `;
 
 const GameImage = props => {
-  console.log(props);
   if (!props.data.Game || !props.data.Game[0].questions) {
     return null;
   }

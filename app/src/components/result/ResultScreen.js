@@ -13,7 +13,7 @@ class ResultScreen extends Component {
           <Fragment>
               <GameImage gameId={gameid}/>
               <AnswerMap gameId={gameid}/>
-            <Results id={gameid} />
+              <Results id={gameid} />
           </Fragment>
         );
     }

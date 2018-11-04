@@ -39,25 +39,24 @@ class AnswerMap extends Component {
     console.log(this.props.data.Answer);
 
     return (
-      <Fragment>
+      <div style={{height: "100vh", width: "100%"}}>
         <GoogleMapReact bootstrapURLKeys={{key: "AIzaSyA8cmyFachXAjlw_lc7QvC8JX1MnmGPJWw"}}
-                        defaultCenter={this.props.center} defaultZoom={this.props.zoom}
-                        onClick={this.handleClick}>
+                        defaultCenter={this.props.center} defaultZoom={this.props.zoom}>
           {/*<Marker lat={this.state.latitude} lng={this.state.longitude}/>*/}
         </GoogleMapReact>
-      </Fragment>
+      </div>
     )
   }
-};
+}
 
 AnswerMap.propTypes = {
   gameId: PropTypes.string,
 };
 
-const withImage = graphql(ANSWER_MAP_SUBSCRIPTION, {
+const withMapData = graphql(ANSWER_MAP_SUBSCRIPTION, {
   options: ({gameId}) => ({
-    variables: {id: gameId}
+    variables: {gameId}
   })
 });
 
-export default withImage(AnswerMap);
+export default withMapData(AnswerMap);
