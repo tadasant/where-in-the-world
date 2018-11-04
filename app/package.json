@@ -17,9 +17,14 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1"
   },
+  "devDependencies": {
+    "netlify-lambda": "^1.0.2"
+  },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build:app": "react-scripts build",
+    "build:lambda": "netlify-lambda build lambda",
+    "build": "npm run build:app && npm run build:lambda",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
