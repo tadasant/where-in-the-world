@@ -13,7 +13,7 @@ class GameScreen extends Component {
     const currentDateTime = new Date();
 
     if (endDateTime < currentDateTime) {
-      pushToResults();
+      // pushToResults();
     } else {
       setTimeout(pushToResults, endDateTime - currentDateTime);
     }
@@ -28,7 +28,7 @@ class GameScreen extends Component {
         ID: {game.id}<br/>
         endDateTime: {game.endDateTime}<br/>
         questionId: {game.questions.id}<br/>
-        questionImage: <img src={game.questions.imgURL}/>
+        questionImage: <img alt='game-img' src={game.questions.imgURL}/>
         <AnswerSelection questionId={game.questions.id} gameId={game.id}/>
       </div>
     </div>;

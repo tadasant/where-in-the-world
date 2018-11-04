@@ -9,6 +9,8 @@ import {getMainDefinition} from 'apollo-utilities';
 import React, {Component} from 'react';
 import {ApolloProvider} from 'react-apollo';
 import Routing from './components/Routing';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faMapMarker } from '@fortawesome/free-solid-svg-icons'
 
 const graphqlUri = 'https://where-in-the-world-hq.herokuapp.com/v1alpha1/graphql';
 
@@ -48,6 +50,10 @@ const client = new ApolloClient({
   link,
   cache: new InMemoryCache()
 });
+
+// adding fontawesome icons we'll use
+library.add(faMapMarker);
+
 
 class App extends Component {
   render() {

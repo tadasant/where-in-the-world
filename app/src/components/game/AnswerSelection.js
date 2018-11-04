@@ -1,3 +1,4 @@
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import GoogleMapReact from 'google-map-react';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
@@ -18,6 +19,8 @@ const INSERT_ANSWER = gql`
         }
     }
 `;
+
+const Marker = () => <FontAwesomeIcon icon="map-marker"/>;
 
 class AnswerSelection extends Component {
   static defaultProps = {
@@ -57,7 +60,8 @@ class AnswerSelection extends Component {
       });
   }
 
-  handleClick({ x, y, lat, lng }) {
+  handleClick({x, y, lat, lng}) {
+    console.log(`${lat}, ${lng}`);
     this.setState({
       latitude: lat,
       longitude: lng
@@ -70,7 +74,9 @@ class AnswerSelection extends Component {
         <div style={{height: "100vh", width: "100%"}}>
           <GoogleMapReact bootstrapURLKeys={{key: "AIzaSyA8cmyFachXAjlw_lc7QvC8JX1MnmGPJWw"}}
                           defaultCenter={this.props.center} defaultZoom={this.props.zoom}
-                          onClick={this.handleClick}/>
+                          onClick={this.handleClick}>
+            <Marker lat={this.state.latitude} lng={this.state.longitude}/>
+          </GoogleMapReact>
         </div>
         <button onClick={this.handleSubmit}>Submit</button>
       </Fragment>
