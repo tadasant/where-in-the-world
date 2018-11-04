@@ -37,7 +37,7 @@ class LoginScreen extends Component {
     this.props
       .mutate({ variables: { name: this.state.name } })
       .then(({ data }) => {
-        localStorage.setItem("playerId", data.insert_Player.returning[0].id);
+        localStorage.setItem("witw-playerId", data.insert_Player.returning[0].id);
         this.props.history.push('/game');
       })
       .catch(error => {

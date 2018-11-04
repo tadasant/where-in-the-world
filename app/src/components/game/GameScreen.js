@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import {Component} from 'react';
 import {withRouter} from 'react-router-dom';
+import AnswerSelection from './AnswerSelection';
 
 class GameScreen extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class GameScreen extends Component {
           endDateTime: {game.endDateTime}<br/>
           questionId: {game.questions.id}<br/>
           questionImage: <img src={game.questions.imgURL}/>
+          <AnswerSelection questionId={game.questions.id} gameId={game.id}/>
         </div>
         }
       </div>
