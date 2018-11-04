@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/Logo.png';
+import PlayerCount from './PlayerCount';
 import UserName from './UserName';
 
 const HeaderContainer = styled.div`
@@ -18,9 +19,9 @@ const LogoImg = styled.img`
 `;
 
 const Header = props => (
-  <HeaderContainer >
+  <HeaderContainer>
     <div>
-      Player count
+      <PlayerCount/>
     </div>
     <div>
       <LogoImg src={logo}/>
