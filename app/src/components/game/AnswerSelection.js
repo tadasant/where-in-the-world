@@ -1,7 +1,8 @@
+import GoogleMapReact from 'google-map-react';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import {Component} from 'react';
+import {Component, Fragment} from 'react';
 import {graphql} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 
@@ -19,6 +20,14 @@ const INSERT_ANSWER = gql`
 `;
 
 class AnswerSelection extends Component {
+  static defaultProps = {
+    center: {
+      lat: 45,
+      lng: 260
+    },
+    zoom: 0
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,10 +35,10 @@ class AnswerSelection extends Component {
       longitude: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit() {
     this.props
       .mutate({
         variables: {
@@ -48,26 +57,24 @@ class AnswerSelection extends Component {
       });
   }
 
+  handleClick({ x, y, lat, lng }) {
+    this.setState({
+      latitude: lat,
+      longitude: lng
+    });
+  }
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          name="latitude"
-          onChange={(e) => this.setState({latitude: e.target.value || ''})}
-          placeholder="Latitude (0-90)"
-          value={this.state.name}
-        />
-        <input
-          type="text"
-          name="longitude"
-          onChange={(e) => this.setState({longitude: e.target.value || ''})}
-          placeholder="Longitude (0-180)"
-          value={this.state.name}
-        />
-        <input type="submit" title="Submit" />
-      </form>
-    );
+      <Fragment>
+        <div style={{height: "100vh", width: "100%"}}>
+          <GoogleMapReact bootstrapURLKeys={{key: "AIzaSyA8cmyFachXAjlw_lc7QvC8JX1MnmGPJWw"}}
+                          defaultCenter={this.props.center} defaultZoom={this.props.zoom}
+                          onClick={this.handleClick}/>
+        </div>
+        <button onClick={this.handleSubmit}>Submit</button>
+      </Fragment>
+    )
   }
 }
 
