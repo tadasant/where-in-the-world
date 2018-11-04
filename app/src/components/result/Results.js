@@ -33,8 +33,8 @@ const Results = props => {
 };
 
 const withResults = graphql(RESULT_QUERY, {
-  options: ({ id }) => ({
-    variables: { id }
+  options: ({ gameId }) => ({
+    variables: { id: gameId }
   })
 });
 
