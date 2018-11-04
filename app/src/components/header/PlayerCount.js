@@ -16,9 +16,8 @@ const TextSpan = styled.span`
   color: white;
 `;
 
-const countActivePlayers = data => {
-  // playerList.filter(player => player.lastSeen > new Date(new Date()-60000).toISOString()).length;
-  return 5;
+const countActivePlayers = playerList => {
+  return playerList.filter(player => player.lastSeen > new Date(new Date()-(1000 * 60 * 5)).toISOString()).length;
 };
 
 const UserName = props => {
@@ -26,7 +25,7 @@ const UserName = props => {
     return null;
   }
   return (
-    <TextSpan><b>{countActivePlayers(props.data)}</b> live players</TextSpan>
+    <TextSpan><b>{countActivePlayers(props.data.Player)}</b> live players</TextSpan>
   )
 };
 
