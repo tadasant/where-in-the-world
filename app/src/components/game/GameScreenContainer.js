@@ -5,16 +5,17 @@ import GameScreen from './GameScreen';
 import Lobby from './Lobby';
 
 const GAMES_QUERY = gql`
-    subscription {
-        Game(where: {state: {_eq: "live"}}) {
-            id
-            endDateTime
-            questions {
-                id
-                imgURL
-            }
-        }
+  subscription {
+    # Game(where: { id: { _eq: "004c2fa1-a474-40a7-be52-633c6b613e26" } }) {
+    Game(where: {state: {_eq: "live"}}) {
+      id
+      endDateTime
+      questions {
+        id
+        imgURL
+      }
     }
+  }
 `;
 
 const GameScreenContainer = props => {
