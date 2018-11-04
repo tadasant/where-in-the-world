@@ -1,14 +1,20 @@
-import React, { Component } from "react";
+import React, {Component, Fragment} from "react";
 import queryString from "query-string";
+import GameImage from './GameImage';
 import Results from './Results';
 
 class ResultScreen extends Component {
     render() {
-        const params = queryString.parse(this.props.location.search);
-        const { gameId } = params;
-        console.log(gameId);
+        const params = queryString.parse(window.location.search);
+        const { gameid } = params;
+        console.log(gameid);
         return (
-            <Results id={gameId} />
+          <Fragment>
+              {/* Image */}
+              <GameImage gameId={gameid}/>
+              {/* Map */}
+            <Results id={gameid} />
+          </Fragment>
         );
     }
 }
