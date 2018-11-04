@@ -2,6 +2,8 @@ import { request } from 'graphql-request'
 
 function runGame(event, context, callback) {
 
+  console.log(event.body);
+
   const postBody = JSON.parse(event.body);
   const questionId = postBody.questionId;
 
