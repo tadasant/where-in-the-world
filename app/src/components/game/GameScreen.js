@@ -1,6 +1,6 @@
+import gql from 'graphql-tag';
 import * as React from 'react';
 import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
 
 const GAMES_QUERY = gql`
     subscription {
@@ -12,7 +12,14 @@ const GAMES_QUERY = gql`
 
 const GameScreen = props => (
   <div>
-    ID: {props.data.Game && props.data.Game[0].id}
+    Games:<br/>
+    {
+      props.data && props.data.Game ? props.data.Game.map(game => (
+          <div>
+            {game.id}
+          </div>
+        )) : null
+    }
   </div>
 );
 
