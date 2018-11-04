@@ -6,19 +6,21 @@ import GameImage from './GameImage';
 import Results from './Results';
 
 class ResultScreen extends Component {
-  render() {
-    const params = queryString.parse(window.location.search);
-    const {gameid} = params;
-    console.log(gameid);
-    return (
-      <Fragment>
-        <Header/>
-        <GameImage gameId={gameid}/>
-        <AnswerMap gameId={gameid}/>
-        <Results gameId={gameid}/>
-      </Fragment>
-    );
-  }
+
+    render() {
+        const params = queryString.parse(window.location.search);
+        const { gameid } = params;
+        console.log(gameid);
+        return (
+          <Fragment>
+              <Header/>
+              <h2 style={{paddingLeft: ".3em"}}>Game Results</h2>
+              <GameImage gameId={gameid}/>
+              <AnswerMap gameId={gameid}/>
+              <Results gameId={gameid} />
+          </Fragment>
+        );
+    }
 }
 
 

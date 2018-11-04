@@ -1,11 +1,22 @@
 import React from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
+import styled from "styled-components";
+
+const ResultStyled = styled.li`
+  margin: .6em 0;
+  & > span:last-child  {
+    float: right;
+    padding-right: 1em;
+    
+  }
+`;
 
 const RESULT_QUERY = gql`
-  query getResults($id: uuid!) {
+  subscription getResults($id: uuid!) {
     Game(where: { id: { _eq: $id } }) {
       answers {
+        id
         player {
           name
         }
@@ -18,23 +29,31 @@ const RESULT_QUERY = gql`
 `;
 
 const rankResults = answers =>
-  answers.sort((a, b) => b.result[0].score - a.result[0].score);
+  answers.sort((a, b) => a.result[0].score - b.result[0].score);
 
 const Results = props => {
   if (props.data.loading || !props.data.Game) {
     return null;
   }
 
-  const answers = props.data.Game[0].answers;
-  const allResultsReady = answers.every(answer => answer.result && answer.result.length === 1);
-  if (allResultsReady) {
-    rankResults(answers);
-  }
+  const answers = props.data.Game[0].answers.map(answer => {
+    if (answer.result.length !== 1) {
+      answer.result.push({ score: Infinity });
+    }
+    return answer;
+  });
 
-  const resultsList = answers.map((answer, i) => (
-    <li key={i}>
-      {answer.player.name} - {answer.result.length > 0 ? answer.result[0].score : 'Calculating...'}
-    </li>
+  const rankedAnswers = rankResults(answers);
+
+  const resultsList = rankedAnswers.map((answer, i) => (
+    <ResultStyled key={i}>
+      <span>{answer.player.name}</span>
+      <span>
+        {answer.result[0].score !== Infinity
+          ? `${answer.result[0].score.toLocaleString()} km`
+          : "Calculating..."}
+      </span>
+    </ResultStyled>
   ));
 
   return <ol>{resultsList}</ol>;
