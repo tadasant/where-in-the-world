@@ -8,6 +8,9 @@ function runGame(event, context, callback) {
     'message': 'Successful lambda test!'
   }
 
+  const postBody = JSON.parse(event.body);
+  console.log(postBody);
+
   if (okay) {
     callback(null,
     {
