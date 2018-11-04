@@ -6,7 +6,7 @@ import {graphql} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 
 const INSERT_ANSWER = gql`
-    mutation InsertAnswer($gameId: String!, $playerId: String!, $latLocation: Float!, $longLocation: Float!) {
+    mutation InsertAnswer($gameId: uuid!, $playerId: uuid!, $latLocation: Float!, $longLocation: Float!) {
         insert_Answer(objects: [{
             gameId: $gameId,
             latLocation: $latLocation,
@@ -65,6 +65,7 @@ class AnswerSelection extends Component {
           placeholder="Longitude (0-180)"
           value={this.state.name}
         />
+        <input type="submit" title="Submit" />
       </form>
     );
   }
