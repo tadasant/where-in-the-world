@@ -78,7 +78,7 @@ class AnswerMap extends Component {
     const question = this.props.data.Game[0].questions;
 
     return (
-      <div style={{ height: "200px", width: "100%" }}>
+      <div style={{ height: "75vh", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyA8cmyFachXAjlw_lc7QvC8JX1MnmGPJWw" }}
           defaultCenter={this.props.center}

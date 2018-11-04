@@ -8,16 +8,6 @@ import AnswerSelection from "./AnswerSelection";
 import ProgressBar from "./ProgressBar";
 import styled from "styled-components";
 
-const GameScreenStyled = styled.div`
-  display: flex;
-  flex-flow: column;
-  height: 100%;
-`;
-
-const Question = styled.div`
-  flex: 0 1 auto;
-`;
-
 const QuestionTitle = styled.h2`
   color: #fff;
   padding: 0 0.5em;
@@ -26,12 +16,9 @@ const QuestionTitle = styled.h2`
 
 const QuestionImage = styled.img`
   width: 100%;
-  flex: 0 1 auto;
 `;
 
-const AnswerContainer = styled.div`
-  flex: 1 1 auto;
-`;
+
 
 class GameScreen extends Component {
   componentDidMount() {
@@ -54,19 +41,10 @@ class GameScreen extends Component {
     return (
       <Fragment>
         <Header/>
-        <GameScreenStyled>
-          {/* ID: {game.id}<br/> */}
-          {/* endDateTime: {game.endDateTime}<br/> */}
-          {/* questionId: {game.questions.id}<br/> */}
-          <Question>
             <QuestionTitle>Where in the world is the photo?</QuestionTitle>
             <QuestionImage src={game.questions.imgURL} />
-          </Question>
-          <AnswerContainer>
             <AnswerSelection questionId={game.questions.id} gameId={game.id} />
-          </AnswerContainer>
           <ProgressBar endDateTime={game.endDateTime} />
-        </GameScreenStyled>
       </Fragment>
     );
   }

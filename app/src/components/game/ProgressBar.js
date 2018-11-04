@@ -6,7 +6,7 @@ const ProgressBarContainer = styled.div`
   width: 100%;
   background: #db6a3e;
   height: 40px;
-  position: absolute;
+  position: sticky;
   bottom: 0;
 `;
 

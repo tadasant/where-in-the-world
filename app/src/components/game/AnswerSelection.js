@@ -23,7 +23,7 @@ const INSERT_ANSWER = gql`
 
 const SubmitButton = styled.button`
     font-size: 1.3em;
-    position: absolute;
+    position: sticky;
     bottom: 60px;
     width: 100%;
     margin: 0 auto;
@@ -38,7 +38,16 @@ const SubmitButton = styled.button`
     cursor: pointer;
 `
 
-const Marker = () => <FontAwesomeIcon icon="map-marker"/>;
+const Marker = () => <FontAwesomeIcon
+  style={{
+    position: "absolute",
+    top: -16.5,
+    left: -11
+  }}
+  size="2x"
+  color="blue"
+  icon="map-marker"
+/>;
 
 class AnswerSelection extends Component {
   static defaultProps = {
@@ -89,7 +98,7 @@ class AnswerSelection extends Component {
   render() {
     return (
       <Fragment>
-        <div style={{ height: "calc(100vh - 370px)", width: "100%"}}>
+        <div style={{ height: "80vh", width: "100%"}}>
           <GoogleMapReact bootstrapURLKeys={{key: "AIzaSyA8cmyFachXAjlw_lc7QvC8JX1MnmGPJWw"}}
                           defaultCenter={this.props.center} defaultZoom={this.props.zoom}
                           onClick={this.handleClick}>
