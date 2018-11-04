@@ -11,6 +11,7 @@
     "apollo-link-ws": "^1.0.9",
     "apollo-utilities": "^1.0.25",
     "geo-distance": "^0.2.0",
+    "google-map-react": "^1.0.9",
     "gql": "^1.1.2",
     "graphql": "^14.0.2",
     "graphql-request": "^1.8.2",
