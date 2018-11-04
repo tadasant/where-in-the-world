@@ -4,8 +4,8 @@ import gql from "graphql-tag";
 import styled from "styled-components";
 
 const addPlayer = gql`
-  mutation InsertPlayer($name: String!) {
-    insert_Player(objects: [{ name: $name }]) {
+  mutation InsertPlayer($name: String!, $seenDateTime: timestamptz!) {
+    insert_Player(objects: [{ name: $name, lastSeen: $seenDateTime }]) {
       returning {
         id
         name
@@ -83,7 +83,7 @@ class LoginScreen extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props
-      .mutate({ variables: { name: this.state.name } })
+      .mutate({ variables: { name: this.state.name, seenDateTime: new Date().toISOString() } })
       .then(({ data }) => {
         localStorage.setItem(
           "witw-playerId",
