@@ -15,6 +15,7 @@ const HeaderContainer = styled.div`
   padding-right: 8px;
   position: sticky;
   top: 0;
+  z-index: 10;
 `;
 
 const LogoImg = styled.img`

@@ -45,6 +45,7 @@ const NameInput = styled.input`
   margin: 0.3em 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  max-width: 350px;
 `;
 
 const JoinButton = styled.input`
@@ -59,6 +60,7 @@ const JoinButton = styled.input`
   cursor: pointer;
   border-radius: 4px;
   font-weight: bold;
+  max-width: 350px;
 `;
 
 class LoginScreen extends Component {
