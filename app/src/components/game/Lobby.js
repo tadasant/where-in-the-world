@@ -2,21 +2,6 @@ import * as React from 'react';
 import Header from '../header/Header';
 import styled from "styled-components";
 
-const LoginHeader = styled.div`
-  position: fixed;
-  width: 100%;
-  background: #ec8d1e;
-`;
-
-const Title = styled.h1`
-  text-align: center;
-  color: #fff;
-  letter-spacing: 0.2em;
-  margin: 0.6em 0em;
-  font-size: 1.3em;
-  text-transform: uppercase;
-`;
-
 const WaitText = styled.h3`
   position: fixed;
   color: #fff;
@@ -25,7 +10,6 @@ const WaitText = styled.h3`
   margin: 10rem auto;
   text-align: center;
 `;
-
 
 const Lobby = () => (
   <div>
