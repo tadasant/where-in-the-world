@@ -18,7 +18,7 @@ const GameImage = props => {
     return null;
   }
   return (
-    <img alt='game-img' style={{width: "100%"}} src={props.data.Game[0].questions.imgURL}/>
+    <img alt='game-img' style={{width: "100%", objectFit: "cover"}} src={props.data.Game[0].questions.imgURL}/>
   )
 };
 

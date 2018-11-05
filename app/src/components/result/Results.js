@@ -56,7 +56,7 @@ const Results = props => {
     </ResultStyled>
   ));
 
-  return <ol>{resultsList}</ol>;
+  return <ol style={{ flexBasis: "640px"}}>{resultsList}</ol>;
 };
 
 const withResults = graphql(RESULT_QUERY, {
