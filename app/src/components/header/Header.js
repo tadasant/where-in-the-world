@@ -12,6 +12,8 @@ const HeaderContainer = styled.div`
   align-items: center;
   padding-left: 8px;
   padding-right: 8px;
+  position: sticky;
+  top: 0;
 `;
 
 const LogoImg = styled.img`

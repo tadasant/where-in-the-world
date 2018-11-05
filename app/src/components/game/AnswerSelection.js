@@ -23,8 +23,8 @@ const INSERT_ANSWER = gql`
 
 const SubmitButton = styled.button`
   font-size: 1.3em;
-  position: sticky;
-  bottom: 33px;
+  position: fixed;
+  bottom: 40px;
   width: 100%;
   margin: 0 auto;
   border-radius: 20px;
@@ -38,13 +38,16 @@ const SubmitButton = styled.button`
   cursor: pointer;
   box-shadow: 1px 1px 5.8px rgba(0, 0, 0, 0.6);
   z-index: 10;
+  max-width: 230px;
+  left: 50%;
+  margin-left: -115px;
 `;
 
 const Marker = () => <FontAwesomeIcon
   style={{
     position: "absolute",
-    top: -16.5,
-    left: -11
+    top: -22.5,
+    left: -9
   }}
   size="2x"
   color="blue"
