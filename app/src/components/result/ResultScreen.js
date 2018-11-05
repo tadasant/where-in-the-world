@@ -1,11 +1,21 @@
 import queryString from "query-string";
 import React, {Component, Fragment} from "react";
+import {graphql} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../header/Header';
 import AnswerMap from './AnswerMap';
 import GameImage from './GameImage';
 import Results from './Results';
+import gql from 'graphql-tag';
+
+const GAME_SUBSCRIPTION = gql`
+    subscription GameSubscription($id: uuid!) {
+        Game(where: {id: {_eq: $id}}) {
+            state
+        }
+    }
+`;
 
 const ReturnButton = styled.button`
   background-color: #db6a3e;
@@ -48,7 +58,7 @@ class ResultScreen extends Component {
   render() {
     const params = queryString.parse(window.location.search);
     const {gameid} = params;
-    console.log(gameid);
+    const hideReturn = this.props.data.Game && this.props.data.Game[0].state === 'completed' ? false : true;
     return (
       <Fragment>
         <Header/>
@@ -57,7 +67,9 @@ class ResultScreen extends Component {
             <h2 style={{paddingLeft: ".3em"}}>Game Results</h2>
           </div>
           <div>
-            <ReturnButton onClick={this.handleClick}>Play Again</ReturnButton>
+            {hideReturn
+            ? null
+            :  <ReturnButton onClick={this.handleClick}>Play Again</ReturnButton>}
           </div>
         </FlexContainer>
         <GameImage gameId={gameid}/>
@@ -68,5 +80,12 @@ class ResultScreen extends Component {
   }
 }
 
+const withGame = graphql(GAME_SUBSCRIPTION, {
+  options: () => {
+    return {
+      variables: {id: queryString.parse(window.location.search).gameid}
+    };
+  }
+});
 
-export default withRouter(ResultScreen);
+export default withGame(withRouter(ResultScreen));
