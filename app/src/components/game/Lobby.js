@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Header from '../header/Header';
 import styled from "styled-components";
 
 const LoginHeader = styled.div`
@@ -29,9 +30,7 @@ const WaitText = styled.h3`
 const Lobby = () => (
   <div>
     <div>
-      <LoginHeader>
-        <Title>Where in the world?</Title>
-      </LoginHeader>
+      <Header/>
     </div>
     <div>
       <WaitText>
