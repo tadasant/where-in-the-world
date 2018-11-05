@@ -8,6 +8,8 @@ A real-time image location trivia app!
 
 ## [Start Game 3](https://witworld.live/.netlify/functions/runGameWrapper?idx=2)
 
+## [Start Game 4](https://witworld.live/.netlify/functions/runGameWrapper?idx=3)
+
 ## [Start Random Game!](https://witworld.live/.netlify/functions/runGameWrapper)
 
 ## [Finish Games](https://witworld.live/.netlify/functions/killGames)
