@@ -27,33 +27,21 @@ const Marker = ({ isCurrentPlayer, isSolution }) => {
   // current player, solution, other players
   return isCurrentPlayer ? (
     <FontAwesomeIcon
-      style={{
-        position: "absolute",
-        top: -16.5,
-        left: -11
-      }}
+      style={{ position: "absolute", top: -23, left: -9.375 }}
       size="2x"
       color="blue"
       icon="map-marker"
     />
   ) : isSolution ? (
     <FontAwesomeIcon
-      style={{
-        position: "absolute",
-        top: -16.5,
-        left: -11
-      }}
+      style={{ position: "absolute", top: -33.5, left: -12 }}
       size="3x"
       color="green"
       icon="map-marker-alt"
     />
   ) : (
     <FontAwesomeIcon
-      style={{
-        position: "absolute",
-        top: -33,
-        left: -12.375
-      }}
+      style={{ position: "absolute", top: -23, left: -9.375 }}
       size="2x"
       color="red"
       icon="map-marker"
