@@ -32,7 +32,7 @@ Start by initiating the player lobby if it is not yet initiated. To do so:
 
 Next, we need to kick off a game. Keep in mind, if you happen to be doing this process at the same time as someone else, you'll be in the same game -- the more, the merrier! To get started:
 
-* Scroll down to the [admin panel](#Admin Panel) section
+* Scroll down to the [admin panel](https://github.com/tadasant/where-in-the-world#admin-panel) section
 * Choose one of the games to play (each game is associated with a particular image)
 * There's more than 4; consider choosing a random one!
 
@@ -45,7 +45,7 @@ Lastly, don't forget to click [Finish Game](https://witworld.live/.netlify/funct
 In a simplified nutshell, here's the flow of the game:
 
 1. Clicking "Finish Game" invokes a Netlify Function that calls on our Hasura instance (hosted on Heroku) to move all the ongoing games (should be at most 1) in our database to "finished" state.
-2. Clicking one of the "Start Game" links in the [admin panel](#Admin Panel) kicks off a Netlify Function that also calls on Hasura: move ongoing games to "finished" state + set a new game to "live" state  
+2. Clicking one of the "Start Game" links in the [admin panel](https://github.com/tadasant/where-in-the-world#admin-panel) kicks off a Netlify Function that also calls on Hasura: move ongoing games to "finished" state + set a new game to "live" state  
 3. At this point, there's a live game. The client-side React code is connected to our Hasura instance via GraphQL subscriptions, and the logic is such that this shift to a "live" game will automatically throw all the clients into this "live" game
 4. The # of live players in the top left of the UI also uses a subscription to stay updated. Our code assumes any player who has initially loaded the app in the past 5 minutes to be "live".
 5. Each player's guess input is sent to a Netlify Function, which transforms it into a score, and pushes it back out to Hasura
