@@ -2,6 +2,10 @@
 
 Grand prize winning submission at the [freeCodeCamp/Netlify JAMstack Hackathon 2018](https://hackathon.freecodecamp.org/) by team Where In The World ([Jeff Appareti](https://github.com/jappareti), [Tyler Vick](https://github.com/tjvick), [Gabe Greenfield](https://github.com/gaberoo322), and [Tadas Antanavicius](https://github.com/tadasant)).
 
+**We've made changes to the project since the hackathon**. View the original submission on the [`original-hackathon-submission`](https://github.com/tadasant/where-in-the-world/tree/original-hackathon-submission) branch
+
+# Overview
+
 [Where in the World](https://witworld.live) is a real-time game show application built on the [JAMstack](https://jamstack.org/). Its mission is two-pronged:
 
 1) Show off the power of JAMstack
