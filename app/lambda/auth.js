@@ -17,12 +17,12 @@ function auth(event, context, callback) {
       callback(null, {
         statusCode: 200,
         headers,
-        body: {
+        body: JSON.stringify({
           'X-Hasura-Role': 'admin'
-        },
+        }),
       })
     } else {
-      callback(null, {
+      callback(new Error('Invalid admin-token'), {
         statusCode: 401,
         headers,
       })
@@ -31,9 +31,9 @@ function auth(event, context, callback) {
     callback(null, {
       statusCode: 200,
       headers,
-      body: {
+      body: JSON.stringify({
         'X-Hasura-Role': 'public'
-      },
+      }),
     })
   }
 }
