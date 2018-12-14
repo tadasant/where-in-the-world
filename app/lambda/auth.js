@@ -2,6 +2,8 @@
   Returns `public` policy unless admin-token is sent.
 
   admin-token must be equal to environment variable HASURA_ADMIN_TOKEN
+
+  Should be a POST request with admin-token in body
  */
 
 function auth(event, context, callback) {
