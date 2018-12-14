@@ -14,8 +14,8 @@ function auth(event, context, callback) {
     'Content-Type': 'application/json'
   };
 
-  if (postBody['admin-token']) {
-    if (postBody['admin-token'] === process.env.HASURA_ADMIN_TOKEN) {
+  if (postBody['headers']['admin-token']) {
+    if (postBody['headers']['admin-token'] === process.env.HASURA_ADMIN_TOKEN) {
       callback(null, {
         statusCode: 200,
         headers,
