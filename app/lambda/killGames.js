@@ -1,4 +1,4 @@
-import { request } from 'graphql-request'
+import {GraphQLClient, request} from 'graphql-request'
 
 function killGames(event, context, callback) {
 
@@ -20,7 +20,8 @@ function killGames(event, context, callback) {
     'Access-Control-Allow-Origin': '*',
   };
 
-  request(hasuraURL, setLiveToCompleteQuery)
+  const client = new GraphQLClient(hasuraURL, { headers: {'admin-token': process.env.HASURA_ADMIN_TOKEN} });
+  client.request(setLiveToCompleteQuery)
     .then((data) => {
       const n_killed_games = data.update_Game.affected_rows
       callback(null, {

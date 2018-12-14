@@ -1,4 +1,4 @@
-import { request } from 'graphql-request';
+import {GraphQLClient, request} from 'graphql-request';
 import httpRequest from 'request';
 
 function runGameWrapper(event, context, callback) {
@@ -35,7 +35,8 @@ function runGameWrapper(event, context, callback) {
     return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
   }
 
-  request(hasuraURL, getQuestions)
+  const client = new GraphQLClient(hasuraURL, { headers: {'admin-token': process.env.HASURA_ADMIN_TOKEN} });
+  client.request(getQuestions)
     .then((data) => {
       const questions = data.Question;
       const nQuestions = questions.length;

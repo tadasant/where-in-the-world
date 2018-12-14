@@ -1,4 +1,4 @@
-import { request } from 'graphql-request'
+import {GraphQLClient, request} from 'graphql-request'
 
 function runGame(event, context, callback) {
 
@@ -47,9 +47,10 @@ function runGame(event, context, callback) {
     'Access-Control-Allow-Origin': '*',
   };
 
-  request(hasuraURL, setLiveToCompleteQuery)
+  const client = new GraphQLClient(hasuraURL, { headers: {'admin-token': process.env.HASURA_ADMIN_TOKEN} });
+  client.request(hasuraURL, setLiveToCompleteQuery)
     .then(() => {
-      request(hasuraURL, buildGameStartQuery(questionId))
+      client.request(buildGameStartQuery(questionId))
         .then((data) => {
           const gameId = data.insert_Game.returning[0].id;
           callback(null, {

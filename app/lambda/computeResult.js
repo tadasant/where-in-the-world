@@ -1,4 +1,4 @@
-import { request } from 'graphql-request'
+import { GraphQLClient, request } from 'graphql-request'
 const geoDist = require('geo-distance');
 
 function computeResult(event, context, callback) {
@@ -35,7 +35,8 @@ function computeResult(event, context, callback) {
     'Access-Control-Allow-Origin': '*',
   };
 
-  request(hasuraURL, getAnswerQuery)
+  const client = new GraphQLClient(hasuraURL, { headers: {'admin-token': process.env.HASURA_ADMIN_TOKEN} });
+  client.request(getAnswerQuery)
     .then((data) => {
       const truthLocation = {
         lat: data.Game[0].questions.latLocation,
@@ -69,7 +70,7 @@ function computeResult(event, context, callback) {
         }
       `;
 
-      request(hasuraURL, addResultQuery)
+      client.request(addResultQuery)
         .then((response) => {
           // const n_affected_rows = response.insert_Result.affected_rows;
           callback(null, {
