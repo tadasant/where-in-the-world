@@ -7,8 +7,10 @@
  */
 
 function auth(event, context, callback) {
+  console.log(event);
   const postBody = JSON.parse(event.body || '{}');
-  console.log(postBody);
+  console.log(`body: ${postBody}`);
+
 
   const headers = {
     'Access-Control-Allow-Origin': '*',
