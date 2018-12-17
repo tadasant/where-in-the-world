@@ -47,7 +47,7 @@ function runGame(event, context, callback) {
     'Access-Control-Allow-Origin': '*',
   };
 
-  const client = new GraphQLClient(hasuraURL, { headers: {'admin-token': process.env.HASURA_ADMIN_TOKEN} });
+  const client = new GraphQLClient(hasuraURL, { headers: {'admin-token': process.env.HASURA_GRAPHQL_ACCESS_KEY} });
   client.request(hasuraURL, setLiveToCompleteQuery)
     .then(() => {
       client.request(buildGameStartQuery(questionId))
