@@ -7,37 +7,40 @@
  */
 
 function auth(event, context, callback) {
-  const postBody = JSON.parse(event.body);
+  const postBody = JSON.parse(event.body || '{}');
 
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json'
   };
 
-  if (postBody['headers']['admin-token']) {
-    if (postBody['headers']['admin-token'] === process.env.HASURA_ADMIN_TOKEN) {
-      callback(null, {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({
-          'X-Hasura-Role': 'admin'
-        }),
-      })
-    } else {
-      callback(new Error('Invalid admin-token'), {
-        statusCode: 401,
-        headers,
-      })
+  if ('headers' in postBody) {
+    if (postBody['headers']['admin-token']) {
+      if (postBody['headers']['admin-token'] === process.env.HASURA_ADMIN_TOKEN) {
+        callback(null, {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify({
+            'X-Hasura-Role': 'admin'
+          }),
+        });
+        return;
+      } else {
+        callback(new Error('Invalid admin-token'), {
+          statusCode: 401,
+          headers,
+        });
+        return;
+      }
     }
-  } else {
-    callback(null, {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        'X-Hasura-Role': 'public'
-      }),
-    })
   }
+  callback(null, {
+    statusCode: 200,
+    headers,
+    body: JSON.stringify({
+      'X-Hasura-Role': 'public'
+    }),
+  })
 }
 
 exports.handler = auth;
