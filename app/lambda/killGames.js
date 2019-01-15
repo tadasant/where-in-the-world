@@ -20,7 +20,7 @@ function killGames(event, context, callback) {
     'Access-Control-Allow-Origin': '*',
   };
 
-  const client = new GraphQLClient(hasuraURL, { headers: {'admin-token': process.env.HASURA_GRAPHQL_ACCESS_KEY} });
+  const client = new GraphQLClient(hasuraURL, { headers: {'Admin-Token': process.env.HASURA_GRAPHQL_ACCESS_KEY} });
   client.request(setLiveToCompleteQuery)
     .then((data) => {
       const n_killed_games = data.update_Game.affected_rows

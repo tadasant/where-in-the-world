@@ -35,7 +35,7 @@ function runGameWrapper(event, context, callback) {
     return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
   }
 
-  const client = new GraphQLClient(hasuraURL, { headers: {'admin-token': process.env.HASURA_GRAPHQL_ACCESS_KEY} });
+  const client = new GraphQLClient(hasuraURL, { headers: {'Admin-Token': process.env.HASURA_GRAPHQL_ACCESS_KEY} });
   client.request(getQuestions)
     .then((data) => {
       const questions = data.Question;

@@ -35,7 +35,7 @@ function computeResult(event, context, callback) {
     'Access-Control-Allow-Origin': '*',
   };
 
-  const client = new GraphQLClient(hasuraURL, { headers: {'admin-token': process.env.HASURA_GRAPHQL_ACCESS_KEY} });
+  const client = new GraphQLClient(hasuraURL, { headers: {'Admin-Token': process.env.HASURA_GRAPHQL_ACCESS_KEY} });
   client.request(getAnswerQuery)
     .then((data) => {
       const truthLocation = {

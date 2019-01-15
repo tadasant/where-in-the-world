@@ -1,9 +1,9 @@
 /*
-  Returns `public` policy unless admin-token is sent.
+  Returns `public` policy unless Admin-Token is sent.
 
-  admin-token must be equal to environment variable HASURA_GRAPHQL_ACCESS_KEY
+  Admin-Token must be equal to environment variable HASURA_GRAPHQL_ACCESS_KEY
 
-  Should be a POST request with admin-token in body
+  Should be a POST request with Admin-Token in body
  */
 
 function auth(event, context, callback) {
@@ -18,8 +18,8 @@ function auth(event, context, callback) {
   };
 
   if ('headers' in postBody) {
-    if (postBody['headers']['admin-token']) {
-      if (postBody['headers']['admin-token'] === process.env.HASURA_GRAPHQL_ACCESS_KEY) {
+    if (postBody['headers']['Admin-Token']) {
+      if (postBody['headers']['Admin-Token'] === process.env.HASURA_GRAPHQL_ACCESS_KEY) {
         callback(null, {
           statusCode: 200,
           headers,
@@ -29,7 +29,7 @@ function auth(event, context, callback) {
         });
         return;
       } else {
-        callback(new Error('Invalid admin-token'), {
+        callback(new Error('Invalid Admin-Token'), {
           statusCode: 401,
           headers,
         });
