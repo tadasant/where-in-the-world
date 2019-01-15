@@ -45,7 +45,7 @@ function runGame(event, context, callback) {
 
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'X-Hasura-Access-Token': process.env.HASURA_GRAPHQL_ACCESS_KEY
+    'X-Hasura-Access-Key': process.env.HASURA_GRAPHQL_ACCESS_KEY
   };
 
   console.log('headers');
