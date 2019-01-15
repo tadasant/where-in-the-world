@@ -50,7 +50,7 @@ function runGame(event, context, callback) {
   };
 
   const client = new GraphQLClient(hasuraURL, { headers });
-  client.request(hasuraURL, setLiveToCompleteQuery)
+  client.request(setLiveToCompleteQuery)
     .then(() => {
       client.request(buildGameStartQuery(questionId))
         .then((data) => {

@@ -78,6 +78,7 @@ function runGameWrapper(event, context, callback) {
       )
     })
     .catch(err => {
+      console.log(err);
       callback(new Error('runGameWrapper function failed. Error code 4567812282'), {
         statusCode: 500,
         headers,
