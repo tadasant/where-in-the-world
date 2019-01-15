@@ -18,7 +18,8 @@ const splitUri = graphqlUri.split('//');
 const wsLink = new WebSocketLink({
   uri: 'wss://' + splitUri[1],
   options: {
-    reconnect: true
+    reconnect: true,
+    lazy: true
   }
 });
 

@@ -82,3 +82,9 @@ Use these links to manage the game:
 The team was thrilled with how much everyone loved the game and the level of interest in the details of how we made it work. We're hoping to do a little bit of work on it as an open source side project to make it live on.
 
 As noted above -- If you're interested in seeing this app go somewhere, let us know by Watching and Starring this repository.
+
+# Development tips
+
+To run the React app locally:
+
+`cd app && npm start`
