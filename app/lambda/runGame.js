@@ -45,11 +45,9 @@ function runGame(event, context, callback) {
 
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'X-Hasura-Access-Key': process.env.HASURA_GRAPHQL_ACCESS_KEY
+    'Admin-Token': process.env.HASURA_GRAPHQL_ACCESS_KEY,
+    'Content-Type': 'application/json',
   };
-
-  console.log('headers');
-  console.log(headers);
 
   const client = new GraphQLClient(hasuraURL, { headers });
   client.request(hasuraURL, setLiveToCompleteQuery)
@@ -72,6 +70,7 @@ function runGame(event, context, callback) {
         })
     })
     .catch(err => {
+      console.log(err);
       callback(new Error('runGame function failed. Error code 012932041'), {
         statusCode: 500,
         headers,
