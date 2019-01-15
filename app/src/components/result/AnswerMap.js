@@ -68,7 +68,7 @@ class AnswerMap extends Component {
     return (
       <div style={{ height: "75vh", width: "100%" }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyCVJrB4lrtU91KWqiYGwC9AAzYnl01NWSI" }}
+          bootstrapURLKeys={{ key: "AIzaSyA8cmyFachXAjlw_lc7QvC8JX1MnmGPJWw" }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
