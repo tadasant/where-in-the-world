@@ -1,27 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GoogleMapReact from "google-map-react";
-import gql from "graphql-tag";
-import PropTypes from "prop-types";
 import * as React from "react";
 import { Component } from "react";
-import { graphql } from "react-apollo";
-
-const ANSWER_MAP_SUBSCRIPTION = gql`
-  subscription AnswerMapSubscription($gameId: uuid!) {
-    Answer(where: { gameId: { _eq: $gameId } }) {
-      latLocation
-      longLocation
-      playerID
-    }
-    Game(where: { id: { _eq: $gameId } }) {
-      questions {
-        latLocation
-        longLocation
-        location
-      }
-    }
-  }
-`;
 
 const Marker = ({ isCurrentPlayer, isSolution }) => {
   // current player, solution, other players
@@ -40,13 +20,13 @@ const Marker = ({ isCurrentPlayer, isSolution }) => {
       icon="map-marker-alt"
     />
   ) : (
-    <FontAwesomeIcon
-      style={{ position: "absolute", top: -23, left: -9.375 }}
-      size="2x"
-      color="red"
-      icon="map-marker"
-    />
-  );
+        <FontAwesomeIcon
+          style={{ position: "absolute", top: -23, left: -9.375 }}
+          size="2x"
+          color="red"
+          icon="map-marker"
+        />
+      );
 };
 
 class AnswerMap extends Component {
@@ -59,11 +39,11 @@ class AnswerMap extends Component {
   };
 
   render() {
-    if (!this.props.data.Answer || !this.props.data.Game) {
+    if (!this.props.answer || !this.props.game) {
       return null;
     }
 
-    const question = this.props.data.Game[0].questions;
+    const question = this.props.game[0].questions;
 
     return (
       <div style={{ height: "75vh", width: "100%" }}>
@@ -72,7 +52,7 @@ class AnswerMap extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          {this.props.data.Answer.map((answer, i) => {
+          {this.props.answer.map((answer, i) => {
             return (
               <Marker
                 key={i}
@@ -95,14 +75,4 @@ class AnswerMap extends Component {
   }
 }
 
-AnswerMap.propTypes = {
-  gameId: PropTypes.string
-};
-
-const withMapData = graphql(ANSWER_MAP_SUBSCRIPTION, {
-  options: ({ gameId }) => ({
-    variables: { gameId }
-  })
-});
-
-export default withMapData(AnswerMap);
+export default AnswerMap;

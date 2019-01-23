@@ -2,7 +2,7 @@ import queryString from "query-string";
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import Header from "../header/Header";
-import AnswerMap from "./AnswerMap";
+import AnswerMap from "./AnswerMapContainer";
 import GameImage from "./GameImage";
 import Results from "./Results";
 import styled from "styled-components";
