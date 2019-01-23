@@ -24,8 +24,9 @@ class Routing extends Component {
       console.error('No mutation error code 5879342785');
     }
 
-    this.props.mutate({ variables: { id: localStorage.getItem('witw-playerId'), lastSeenDate: new Date().toISOString() } })
-
+    if (localStorage.getItem('witw-playerId')) {
+      this.props.mutate({ variables: { id: localStorage.getItem('witw-playerId'), lastSeenDate: new Date().toISOString() } })
+    }
   }
 
   render() {
