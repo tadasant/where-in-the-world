@@ -1,10 +1,42 @@
-# Where in the World?
+&nbsp;
+<p align="center">
+  <a href="https://ghost.org">
+    <img src="https://raw.githubusercontent.com/tadasant/where-in-the-world/master/img/witworld-logo.png" width="300px" alt="WITWorld" />
+  </a>
+</p>
+<h3 align="center">Learn about the world in HQ game show format</h3>
+<p align="center">1st place prize at the FreeCodeCamp/Netlify 2018 Hackathon at GitHub</p>
+<hr />
+<p align="center">
+    <a href="https://witworld.live/">WITWorld.live</a> |
+    <a href="https://medium.freecodecamp.org/the-power-of-jamstack-how-4-strangers-built-an-interactive-live-game-show-app-in-a-short-weekend-f8c1fec4f55b">Medium Post</a> |
+    <a href="https://github.com/tadasant/where-in-the-world#how-do-i-play">How to play</a>
+</p>
+
+<br>
+
+<p align="center">
+    <img src="https://s3.amazonaws.com/baribuilder/_external/witworld-demo-short.gif" width="300" />
+</p>
+<p align="center">
+    See our team interview & full demo <a href="https://youtu.be/QhybHEs87mk?t=5228">here</a>.
+</p>
+
+<br>
+
+&nbsp;
+
+---
+
+&nbsp;
 
 Grand prize winning submission at the [freeCodeCamp/Netlify JAMstack Hackathon 2018](https://hackathon.freecodecamp.org/) by team Where In The World ([Jeff Appareti](https://github.com/jappareti), [Tyler Vick](https://github.com/tjvick), [Gabe Greenfield](https://github.com/gaberoo322), and [Tadas Antanavicius](https://github.com/tadasant)).
 
-**We've made changes to the project since the hackathon**. View the original submission on the [`original-hackathon-submission`](https://github.com/tadasant/where-in-the-world/tree/original-hackathon-submission) branch
+**We've made changes to the project since the hackathon**. View the original submission on the [`original-hackathon-submission`](https://github.com/tadasant/where-in-the-world/tree/original-hackathon-submission) branch.
 
-# Overview
+Read more about the weekend where we hacked this project together on [Medium](https://medium.freecodecamp.org/the-power-of-jamstack-how-4-strangers-built-an-interactive-live-game-show-app-in-a-short-weekend-f8c1fec4f55b).
+
+&nbsp;
 
 [Where in the World](https://witworld.live) is a real-time game show application built on the [JAMstack](https://jamstack.org/). Its mission is two-pronged:
 
