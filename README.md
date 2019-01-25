@@ -38,6 +38,8 @@ Read more about the weekend where we hacked this project together on [Medium](ht
 
 &nbsp;
 
+---
+
 [Where in the World](https://witworld.live) is a real-time game show application built on the [JAMstack](https://jamstack.org/). Its mission is two-pronged:
 
 1) Show off the power of JAMstack
